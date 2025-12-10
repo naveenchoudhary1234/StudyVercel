@@ -1,6 +1,6 @@
 const User = require("../Model/User");
 const mailSender = require("../Util/MailSender")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const crypto = require("crypto")
 const FRONTEND_URL = "http://localhost:3000";
 
