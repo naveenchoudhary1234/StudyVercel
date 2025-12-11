@@ -115,57 +115,57 @@ function CourseDetails() {
       <div className="relative w-full bg-richblack-800">
         {/* Hero Section */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50"></div>
-        <div className="mx-auto box-content px-4 lg:w-[1260px] relative z-10">
-          <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
-            <div className="relative block max-h-[30rem] lg:hidden">
+        <div className="mx-auto box-content px-2 sm:px-4 lg:w-[1260px] relative z-10">
+          <div className="mx-auto grid min-h-[300px] sm:min-h-[450px] max-w-maxContentTab justify-items-center py-4 sm:py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
+            <div className="relative block max-h-[20rem] sm:max-h-[30rem] lg:hidden w-full">
  <div className="absolute bottom-0 left-0 h-full w-full shadow-[#161D29_0px_-64px_36px_-28px_inset]"></div>
               <img
                 src={thumbnail}
                 alt="course thumbnail"
-                className="aspect-auto w-full"
+                className="aspect-auto w-full rounded-lg"
               />
             </div>
-            <div className="z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5">
+            <div className="z-30 my-3 sm:my-5 flex flex-col justify-center gap-2 sm:gap-4 py-3 sm:py-5 text-sm sm:text-lg text-richblack-5 px-2 sm:px-0">
               <div>
-                <p className="text-4xl font-bold text-richblack-5 sm:text-[42px] tracking-wider lg:text-left text-center">
+                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-richblack-5 lg:text-left text-center tracking-wider">
                   {courseName}
                 </p>
               </div>
-              <p className="text-richblack-200">
+              <p className="text-richblack-200 text-xs sm:text-base">
                 <ul className="list-none p-0">
                   {courseDescription.split("\n").map((line, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="mr-2">{index + 1}.</span>
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="mr-1 flex-shrink-0">{index + 1}.</span>
                       <span>{line.trim().substring(line.indexOf(".") + 1).trim()}</span>
                     </li>
                   ))}
                 </ul>
               </p>
-              <div className="text-md flex flex-wrap items-center gap-2 lg:justify-start justify-center">
+              <div className="text-xs sm:text-sm flex flex-wrap items-center gap-2 lg:justify-start justify-center">
                 <span className="text-yellow-25">{avgReviewCount}</span>
-                <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
+                <RatingStars Review_Count={avgReviewCount} Star_Size={20} />
                 <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnroled.length} students enrolled`}</span>
+                <span className="hidden sm:inline">{`${studentsEnroled.length} students enrolled`}</span>
               </div>
-              <div>
+              <div className="text-xs sm:text-sm">
                 <p>Created By {`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>
-              <div className="flex flex-wrap gap-5 text-lg">
-                <p className="flex items-center gap-2">
-                  <BiInfoCircle /> Created at {formatDate(createdAt)}
+              <div className="flex flex-wrap gap-2 sm:gap-5 text-xs sm:text-lg">
+                <p className="flex items-center gap-1 sm:gap-2">
+                  <BiInfoCircle className="text-sm sm:text-base" /> Created at {formatDate(createdAt)}
                 </p>
-                <p className="flex items-center gap-2">
-                  <HiOutlineGlobeAlt /> English
+                <p className="flex items-center gap-1 sm:gap-2">
+                  <HiOutlineGlobeAlt className="text-sm sm:text-base" /> English
                 </p>
               </div>
             </div>
-            <div className="flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden">
-              <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
+            <div className="flex w-full flex-col gap-2 sm:gap-4 border-y border-y-richblack-500 py-3 sm:py-4 lg:hidden px-2 sm:px-0">
+              <p className="space-x-3 pb-2 sm:pb-4 text-2xl sm:text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
               <button 
   onClick={handleBuyCourse}
-  className="relative bg-red-500 text-white font-bold py-3 px-10 font-sans overflow-hidden z-10 group"
+  className="relative bg-red-500 text-white font-bold py-2 sm:py-3 px-6 sm:px-10 font-sans overflow-hidden z-10 group text-sm sm:text-base touch-padding"
 >
   <span className="relative z-10 text-white group-hover:text-red-500 transition duration-500">Buy Now</span>
   <span className="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-500 ease-in-out group-hover:scale-x-100 z-0"></span>
@@ -192,16 +192,16 @@ function CourseDetails() {
         </div>
       </div>
 
-      <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
-        <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px] grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mx-auto box-content px-2 sm:px-4 text-start text-richblack-5 lg:w-[1260px]">
+        <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px] grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* What will you learn section */}
-          <div className="my-8 border border-richblack-600 p-8 rounded-lg shadow-md">
-            <p className="text-3xl font-semibold uppercase tracking-wider">What you'll Learn?</p>
-            <div className="mt-5">
+          <div className="my-6 sm:my-8 border border-richblack-600 p-4 sm:p-6 lg:p-8 rounded-lg shadow-md">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-semibold uppercase tracking-wider">What you'll Learn?</p>
+            <div className="mt-3 sm:mt-5">
               <ul className="list-none p-0 leading-relaxed">
                 {whatYouWillLearn.split("\n").map((line, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="mr-2">{index + 1}.</span>
+                  <li key={index} className="flex items-start gap-2 text-xs sm:text-sm lg:text-base">
+                    <span className="mr-1 flex-shrink-0">{index + 1}.</span>
                     <span>{line.trim().substring(line.indexOf(".") + 1).trim()}</span>
                   </li>
                 ))}
@@ -210,22 +210,22 @@ function CourseDetails() {
           </div>
 
           {/* Course Content Section */}
-          <div className="max-w-[830px] ">
-            <div className="flex flex-col gap-3">
-              <p className="text-[28px] font-semibold uppercase tracking-wider">Course Content</p>
-              <div className ="flex flex-wrap justify-between gap-2">
-                <div className="flex gap-2 tracking-wide">
-                  <span>
+          <div className="max-w-full sm:max-w-[830px]">
+            <div className="flex flex-col gap-2 sm:gap-3">
+              <p className="text-xl sm:text-2xl lg:text-[28px] font-semibold uppercase tracking-wider">Course Content</p>
+              <div className="flex flex-col sm:flex-row flex-wrap justify-between gap-2">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 tracking-wide text-xs sm:text-sm">
+                  <span className="whitespace-nowrap">
                     {courseContent.length} section(s)
                   </span>
-                  <span>
+                  <span className="whitespace-nowrap">
                     {totalNoOfLectures} lecture(s)
                   </span>
-                  <span>{response.data?.totalDuration}</span>
+                  <span className="whitespace-nowrap">{response.data?.totalDuration}</span>
                 </div>
                 <div>
                   <button
-                    className="text-yellow-25"
+                    className="text-yellow-25 text-xs sm:text-sm hover:text-yellow-50 transition-all touch-padding"
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections
@@ -235,7 +235,7 @@ function CourseDetails() {
             </div>
 
             {/* Course Details Accordion */}
-            <div className="py-4">
+            <div className="py-2 sm:py-4">
               {courseContent?.map((course, index) => (
                 <CourseAccordionBar
                   course={course}
@@ -247,9 +247,9 @@ function CourseDetails() {
             </div>
 
             {/* Author Details */}
-            <div className="mb-12 py-4 bg-gray-100 p-4 rounded-lg shadow-md">
-              <p className="text-[28px] font-semibold">Author</p>
-              <div className="flex items-center gap-4 py-4">
+            <div className="mb-8 sm:mb-12 py-3 sm:py-4 bg-gray-100 p-3 sm:p-4 rounded-lg shadow-md">
+              <p className="text-lg sm:text-xl lg:text-[28px] font-semibold">Author</p>
+              <div className="flex items-center gap-3 sm:gap-4 py-2 sm:py-4">
                 <img
                   src={
                     instructor.image
@@ -257,7 +257,7 @@ function CourseDetails() {
                       : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
                   }
                   alt="Author"
-                  className="h-14 w-14 rounded-full object-cover border-2 border-gray-300"
+                  className="h-10 w-10 sm:h-14 sm:w-14 rounded-full object-cover border-2 border-gray-300 flex-shrink-0"
                 />
                 <p className="text-lg font-semibold">{`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>

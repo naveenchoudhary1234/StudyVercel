@@ -17,40 +17,40 @@ export default function Home() {
       {/* Section 1 */}
       <div className='relative mx-auto flex flex-col w-11/12 items-center text-white justify-between'>
         <Link to="/signup">
-          <div className='group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit'>
-            <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] group-hover:bg-richblack-900'>
+          <div className='group mt-8 sm:mt-12 lg:mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit touch-padding'>
+            <div className='flex flex-row items-center gap-2 rounded-full px-4 sm:px-7 lg:px-10 py-2 sm:py-[5px] group-hover:bg-richblack-900 text-sm sm:text-base'>
               <p>Become an Instructor</p>
               <FaArrowRight />
             </div>
           </div>
         </Link>
 
-        <div className='text-center text-4xl font-semibold mt-7'>
+        <div className='text-center text-2xl sm:text-3xl lg:text-4xl font-semibold mt-4 sm:mt-6 lg:mt-7 px-2'>
           Empower Your Future With 
           <HighlighText text={"Coding Skills"} />
         </div>
 
-        <div className='mt-4 w-[90%] text-center text-lg font-bold text-richblack-300'>
+        <div className='mt-3 sm:mt-4 w-full sm:w-[95%] lg:w-[90%] text-center text-sm sm:text-base lg:text-lg font-bold text-richblack-300 px-2'>
           With our online coding courses, you can learn at your own pace, from anywhere in Your Pyaari Duniya
         </div>
 
-        <div className='flex flex-row gap-7 mt-8'>
-          <CTAButton active={true} linkto={"/signup"}> Learn More</CTAButton>
-          <CTAButton active={false} linkto={"/login"}> Book Demo</CTAButton>
+        <div className='flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-7 mt-6 sm:mt-8 w-full sm:w-auto px-2'>
+          <CTAButton active={true} linkto={"/signup"}>Learn More</CTAButton>
+          <CTAButton active={false} linkto={"/login"}>Book Demo</CTAButton>
         </div>
 
-        <div className='shadow-blue-200 mx-3 my-12'>
-          <video muted loop autoPlay className="w-full max-h-[500px] object-cover rounded-lg shadow-lg shadow-blue-500/50">
+        <div className='shadow-blue-200 mx-1 sm:mx-3 my-8 sm:my-10 lg:my-12 w-full sm:w-[95%]'>
+          <video muted loop autoPlay className="w-full max-h-[300px] sm:max-h-[400px] lg:max-h-[500px] object-cover rounded-lg shadow-lg shadow-blue-500/50">
             <source src={Banner} />
           </video>
         </div>
 
         {/* Code Block Section 1 */}
-        <div className='w-full flex justify-center max-w-[70%] gap-4'>
+        <div className='w-full flex justify-center gap-2 sm:gap-3 lg:gap-4 px-2 sm:px-4'>
         <CodeBlocks 
   position="lg:flex-row"
   heading={
-    <div className='text-4xl font-semibold text-center'>
+    <div className='text-xl sm:text-2xl lg:text-4xl font-semibold text-center'>
       Unlock Your 
       {" "}
       <HighlighText text={"Coding Potential"} /> 
@@ -79,11 +79,11 @@ export default function Home() {
 
 
         {/* Code Block Section 2 */}
-        <div className='w-full flex justify-center max-w-[70%]'>
+        <div className='w-full flex justify-center gap-2 sm:gap-3 lg:gap-4 px-2 sm:px-4'>
         <CodeBlocks 
   position="lg:flex-row-reverse"
   heading={
-    <div className='text-4xl font-semibold text-center'>
+    <div className='text-xl sm:text-2xl lg:text-4xl font-semibold text-center'>
       Unlock Your 
       {" "}
       <HighlighText text={"Coding Potential"} /> 

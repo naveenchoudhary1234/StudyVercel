@@ -28,9 +28,9 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='bg-richblack-800'>
-      <div className='flex flex-col w-fit md:min-w-[220px] min-h-[calc(100vh-3.5rem)] border-r border-richblack-700 py-10'>
-        <div className='flex flex-col'>
+    <div className='bg-richblack-800 fixed md:static bottom-0 md:bottom-auto left-0 right-0 md:left-auto md:right-auto z-10'>
+      <div className='flex flex-row md:flex-col w-full md:w-fit md:min-w-[220px] h-fit md:min-h-[calc(100vh-3.5rem)] border-t md:border-t-0 md:border-r border-richblack-700 py-2 md:py-10 overflow-x-auto md:overflow-x-visible'>
+        <div className='flex flex-row md:flex-col gap-2 md:gap-0 w-full'>
           {
             sidebarLinks.map((link) => {
               if (link.type && link.type !== user?.accountType) return null;
@@ -39,7 +39,7 @@ const Sidebar = () => {
           }
         </div>
 
-        <div className='mx-auto my-6 h-[1px] w-10/12 bg-richblack-700'></div>
+        <div className='hidden md:block mx-auto my-6 h-[1px] w-10/12 bg-richblack-700'></div>
 
         <div>
           <SidebarLink
@@ -54,9 +54,9 @@ const Sidebar = () => {
         <div>
           <button
             onClick={() => dispatch(logout(navigate))}
-            className='flex gap-x-2 items-center text-sm font-medium px-3 md:px-8 py-2 text-richblack-300'
+            className='flex gap-x-2 items-center text-xs md:text-sm font-medium px-2 md:px-8 py-2 text-richblack-300 hover:bg-richblack-700 rounded touch-padding whitespace-nowrap'
           >
-            <VscSignOut className='text-lg' />
+            <VscSignOut className='text-base md:text-lg flex-shrink-0' />
             <span className='hidden md:block tracking-wider uppercase'>Logout</span>
           </button>
         </div>

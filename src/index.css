@@ -3,5 +3,59 @@
     .animate-spin-slow {
       animation: spin 3s linear infinite;
     }
-  }
+    
+    /* Mobile responsiveness utilities */
+    .container-responsive {
+      width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    @media (min-width: 640px) {
+      .container-responsive {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .container-responsive {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+    
+    /* Flexible text sizing */
+    .text-responsive-sm {
+      @apply text-sm md:text-base lg:text-lg;
+    }
+    
+    .text-responsive-base {
+      @apply text-base md:text-lg lg:text-xl;
+    }
+    
+    .text-responsive-lg {
+      @apply text-lg md:text-xl lg:text-2xl;
+    }
+    
+    .text-responsive-xl {
+      @apply text-xl md:text-2xl lg:text-3xl;
+    }
+    
+    .text-responsive-2xl {
+      @apply text-2xl md:text-3xl lg:text-4xl;
+    }
+    
+    /* Touch-friendly spacing */
+    @media (hover: none) and (pointer: coarse) {
+      .touch-padding {
+        @apply p-4;
+      }
+      
+      button, a, [role="button"] {
+        @apply min-h-[44px] min-w-[44px];
+      }
+    }
   

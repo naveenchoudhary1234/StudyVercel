@@ -2,7 +2,7 @@ const User = require("../Model/User");
 const mailSender = require("../Util/MailSender")
 const bcrypt = require("bcryptjs")
 const crypto = require("crypto")
-const FRONTEND_URL = "http://localhost:3000";
+const FRONTEND_URL = "https://studynotion.tech"
 
 
 // get email from body

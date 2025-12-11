@@ -31,21 +31,21 @@ Description:"Fully Committed to the success Company",
 export default function TimelineSection() {
   return (
     <div>
-    <div className='flex flex-row gap-15 items-center'>
+    <div className='flex flex-col lg:flex-row gap-8 lg:gap-15 items-center'>
 
-        <div className='flex flex-col w-[45%] gap-5'>
+        <div className='flex flex-col w-full lg:w-[45%] gap-3 sm:gap-4 lg:gap-5'>
          {
 
       timeline.map((element,index)=>{
       return(
-     <div className='flex flex-row gap-6' key={index}>
-         <div className='w-[50px] h-[50px] bg-richblack-200 flex items-center'>
-      <img src={element.Logo}/>
+     <div className='flex flex-row gap-3 sm:gap-4 lg:gap-6' key={index}>
+         <div className='w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] bg-richblack-200 flex items-center flex-shrink-0'>
+      <img src={element.Logo} alt={element.heading}/>
             </div>
 
             <div>
-              <h2 className='font-semibold text-[18px]'>{element.heading}</h2>
-              <p className='text-base'>{element.Description}</p>
+              <h2 className='font-semibold text-sm sm:text-base lg:text-[18px]'>{element.heading}</h2>
+              <p className='text-xs sm:text-sm lg:text-base'>{element.Description}</p>
                 </div>
         </div>
 
@@ -61,16 +61,16 @@ export default function TimelineSection() {
         </div>
 
 
-        <div className='relative shadow-blue-200'>
-         <img src="https://github.com/The-StudyNotion/StudyNotion-V1/blob/main/Client/src/Asset/Image/TimelineImage.png?raw=true" className='shadow-white object-cover h-fit'></img>
-        <div className='absolute bg-caribbeangreen-700 flex flex-row text-white uppercase py-7 left-[50%] translate-x-[-50%] translate-y-[-50%]'>
-        <div className='flex flex-row gap-5 items-center border-r border-caribbeangreen-300'>
-            <p className='font-bold text-3xl'>10</p>
-            <p className='text-caribbeangreen-300 text-sm'>Years of Experience</p>
+        <div className='relative shadow-blue-200 w-full lg:w-auto'>
+         <img src="https://github.com/The-StudyNotion/StudyNotion-V1/blob/main/Client/src/Asset/Image/TimelineImage.png?raw=true" alt='Timeline' className='shadow-white object-cover h-fit w-full lg:w-auto'/>
+        <div className='absolute bg-caribbeangreen-700 flex flex-col sm:flex-row text-white uppercase py-4 sm:py-6 lg:py-7 left-[50%] translate-x-[-50%] translate-y-[-50%] px-3 sm:px-4 rounded-lg'>
+        <div className='flex flex-row gap-3 sm:gap-5 items-center border-b sm:border-b-0 sm:border-r border-caribbeangreen-300 pb-3 sm:pb-0'>
+            <p className='font-bold text-2xl sm:text-3xl'>10</p>
+            <p className='text-caribbeangreen-300 text-xs sm:text-sm'>Years of Experience</p>
         </div>
-        <div className='flex gap-5 items-center px-7'>
-            <p className='font-bold text-3xl'>250</p>
-            <p className='text-caribbeangreen-300 text-sm'>Types Of Courses</p>
+        <div className='flex gap-3 sm:gap-5 items-center px-0 sm:px-4 lg:px-7 pt-3 sm:pt-0'>
+            <p className='font-bold text-2xl sm:text-3xl'>250</p>
+            <p className='text-caribbeangreen-300 text-xs sm:text-sm'>Types Of Courses</p>
         </div>
 
         

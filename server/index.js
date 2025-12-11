@@ -25,12 +25,30 @@ database.Connect();
 
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://studynotion.tech",
+  "https://studynotion12.vercel.app"
+];
+
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like Postman or server)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("CORS blocked for origin: " + origin));
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
+
 
 app.use(
 	fileUpload({
