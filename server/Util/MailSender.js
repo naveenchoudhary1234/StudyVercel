@@ -5,8 +5,8 @@ const mailSender = async (email, title, body) => {
   try {
     let transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
-      port: 465, 
-      secure: true, 
+      port: 587,  // Changed from 465
+      secure: false,  // Changed to false for STARTTLS
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
@@ -14,7 +14,8 @@ const mailSender = async (email, title, body) => {
       tls: {
         rejectUnauthorized: false, 
       },
-      timeout: 10000, 
+      timeout: 20000,  // Increased timeout
+      connectionTimeout: 10000,  // Added connection timeout
     });
 
     let info = await transporter.sendMail({
