@@ -211,13 +211,13 @@ exports.sendotp = async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     });
-    const result = await OTP.findOne({ otp: otp }); // kisi aur user k liye ye same otp to generate nhii hua h islie hmne ye likhaa
-    console.log("Result is Generate OTP Func");
-    console.log("OTP", otp);
-    console.log("Result", result);
-    while (result) {
+    // Ensure OTP is unique by rechecking after each generation
+    console.log("Checking OTP uniqueness...");
+    while (await OTP.findOne({ otp })) {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false,
       });
     }
     const otpPayload = { email, otp };

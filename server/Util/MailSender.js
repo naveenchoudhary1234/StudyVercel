@@ -5,8 +5,9 @@ require("dotenv").config();
 const mailSender = async (email, title, body) => {
   try {
     if (process.env.RESEND_API_KEY) {
+      const fromEmail = process.env.RESEND_FROM || "onboarding@resend.dev";
       const payload = {
-        from: "StudyNotion <no-reply@studynotion.app>",
+        from: fromEmail,
         to: email,
         subject: title,
         html: body,
@@ -24,7 +25,8 @@ const mailSender = async (email, title, body) => {
       const data = await response.json();
       if (!response.ok) {
         console.error("Resend sendMail error:", data);
-        throw new Error(data?.error || "Failed to send email via Resend");
+        // Don't throw for OTP flows; log and continue
+        return { error: data };
       }
       console.log("Resend email sent:", data);
       return data;

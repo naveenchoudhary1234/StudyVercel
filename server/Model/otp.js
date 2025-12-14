@@ -22,7 +22,7 @@ async function sendVerificationEmail(email, otp) {
     await mailSender(email, "Verification Email", emailTemplate(otp));
   } catch (error) {
     console.log(error);
-    throw error;
+    
   }
 }
 
