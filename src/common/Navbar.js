@@ -214,19 +214,22 @@ function Navbar() {
               )}
 
               {token !== null && (
-                <Link
-                  to={"/dashboard/my-profile"}
-                  onClick={() => setIsMenuModalOpen(false)}
-                >
+                <Link to={"/compiler"} onClick={() => setIsMenuModalOpen(false)}>
                   <div className="flex gap-x-2 items-center w-full py-2 px-2 sm:px-3 text-richblack-100 hover:text-richblack-25 hover:bg-richblack-700 uppercase tracking-wider text-xs sm:text-sm rounded touch-padding">
-                    <VscDashboard className="text-base sm:text-lg flex-shrink-0" />
-                    Dashboard
+                    <FaCode className="text-base sm:text-lg flex-shrink-0" />
+                    Compiler
                   </div>
-                  
                 </Link>
               )}
 
-    
+              {token !== null && (
+                <Link to={"/voice"} onClick={() => setIsMenuModalOpen(false)}>
+                  <div className="flex gap-x-2 items-center w-full py-2 px-2 sm:px-3 text-richblack-100 hover:text-richblack-25 hover:bg-richblack-700 uppercase tracking-wider text-xs sm:text-sm rounded touch-padding">
+                    <AiOutlineContacts className="text-base sm:text-lg flex-shrink-0" />
+                    AI Voice
+                  </div>
+                </Link>
+              )}
 
               {token !== null && (
                 <div

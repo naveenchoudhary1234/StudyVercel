@@ -30,13 +30,13 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://studynotion.tech",
   "https://studynotion12.vercel.app",
+  "https://studynotion12-132s6et30-choudharynaveen540-gmailcoms-projects.vercel.app",
   "https://studyvercel-1.onrender.com",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman or server)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
