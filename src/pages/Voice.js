@@ -7,10 +7,15 @@ function Voice() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   async function generateAnswer() {
+    if (cooldown) {
+      setAnswer("Please wait a moment before asking another question.");
+      return;
+    }
     if (!question.trim()) {
       setAnswer("Please enter a question!");
       return;
@@ -26,26 +31,30 @@ function Voice() {
 
     try {
       const response = await axios.post(
-        `${BASE_URL}/voice/generate-answer`,
-        { question },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  `${BASE_URL}/voice/generate-answer`,
+  { question },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }
+);
+
 
       if (response.data.success) {
         setAnswer(response.data.answer);
         setQuestion("");
+        // Set cooldown for 2 seconds to prevent rapid requests
+        setCooldown(true);
+        setTimeout(() => setCooldown(false), 2000);
       } else {
         setAnswer("Failed to generate answer. Please try again.");
       }
     } catch (error) {
       console.error("Error generating answer:", error);
       if (error.response?.status === 429) {
-        setAnswer("Rate limit exceeded. Please try again later.");
+        setAnswer("⏱️ Rate limit exceeded. Please wait 5-10 seconds and try again.");
       } else if (error.response?.data?.message) {
         setAnswer(error.response.data.message);
       } else {
@@ -73,17 +82,18 @@ function Voice() {
           onChange={(e) => setQuestion(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && generateAnswer()}
           disabled={loading}
-          className="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-600 focus:outline-none focus:ring-4 focus:ring-purple-400 bg-gray-900 text-white text-sm sm:text-lg placeholder-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="w-full p-3 sm:p-4 rounded-xl border-2 border-purple-400 focus:outline-none focus:ring-4 focus:ring-purple-500 bg-white text-sm sm:text-lg placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           placeholder="Ask me anything..."
+          style={{ color: '#000000' }}
         />
 
         <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <button
             onClick={generateAnswer}
-            disabled={loading || !question.trim()}
+            disabled={loading || !question.trim() || cooldown}
             className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all shadow-lg text-sm sm:text-base touch-padding"
           >
-            {loading ? "Generating..." : "Generate Answer"}
+            {loading ? "Generating..." : cooldown ? "Please wait..." : "Generate Answer"}
           </button>
           <button
             onClick={stopAnswer}
@@ -93,7 +103,7 @@ function Voice() {
           </button>
         </div>
 
-        <div className="bg-gray-900 rounded-xl p-4 sm:p-6 border border-gray-700 min-h-[200px]">
+        <div className="bg-white rounded-xl p-4 sm:p-6 border-2 border-purple-300 min-h-[200px]">
           {loading ? (
             <div className="flex items-center justify-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
@@ -103,7 +113,8 @@ function Voice() {
               readOnly
               value={answer || "Your answer will appear here..."}
               rows={8}
-              className="w-full p-4 rounded-lg border-2 border-gray-600 bg-gray-950 text-gray-100 text-sm sm:text-base resize-none focus:outline-none"
+              className="w-full h-full p-4 rounded-lg border-0 bg-white text-sm sm:text-base resize-none focus:outline-none placeholder-gray-400"
+              style={{ color: '#000000' }}
             />
           )}
         </div>

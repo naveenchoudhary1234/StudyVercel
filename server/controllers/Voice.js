@@ -1,5 +1,4 @@
 const axios = require("axios");
-require("dotenv").config();
 
 const generateAnswer = async (req, res) => {
   try {
@@ -13,41 +12,34 @@ const generateAnswer = async (req, res) => {
     }
 
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
+      "https://api.groq.com/openai/v1/chat/completions",
       {
-        contents: [
+        model: "llama3-8b-8192", 
+        messages: [
           {
-            parts: [{ text: question }],
+            role: "user",
+            content: question,
           },
         ],
       },
       {
         headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
           "Content-Type": "application/json",
-        },
-        params: {
-          key: process.env.GEMINI_API_KEY, // 🔐 ENV VARIABLE
         },
       }
     );
 
     const answer =
-      response.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from Gemini";
+      response.data?.choices?.[0]?.message?.content ||
+      "No response from Groq";
 
     return res.status(200).json({
       success: true,
       answer,
     });
   } catch (error) {
-    console.error("Gemini API Error:", error.response?.data || error.message);
-
-    if (error.response?.status === 429) {
-      return res.status(429).json({
-        success: false,
-        message: "Rate limit exceeded. Please try again later.",
-      });
-    }
+    console.error("Groq API Error:", error.response?.data || error.message);
 
     return res.status(500).json({
       success: false,
@@ -55,4 +47,5 @@ const generateAnswer = async (req, res) => {
     });
   }
 };
+
 module.exports = { generateAnswer };
