@@ -416,9 +416,8 @@ const enrollStudents = async (courses, userId, res) => {
       );
 
       if (!enrolledCourse) {
-        return res
-          .status(500)
-          .json({ success: false, error: "Course not found" });
+        console.log("Course not found");
+        continue;
       }
       console.log("Updated course: ", enrolledCourse);
 
@@ -441,19 +440,23 @@ const enrollStudents = async (courses, userId, res) => {
 
       console.log("Enrolled student: ", enrolledStudent);
 
-      const emailResponse = await mailSender(
-        enrolledStudent.email,
-        `Successfully Enrolled into ${enrolledCourse.courseName}`,
-        courseEnrollmentEmail(
-          enrolledCourse.courseName,
-          `${enrolledStudent.firstName} ${enrolledStudent.lastName}`
-        )
-      );
-
-      console.log("Email sent successfully: ", emailResponse.response);
+      // Send email but don't fail if it errors
+      try {
+        const emailResponse = await mailSender(
+          enrolledStudent.email,
+          `Successfully Enrolled into ${enrolledCourse.courseName}`,
+          courseEnrollmentEmail(
+            enrolledCourse.courseName,
+            `${enrolledStudent.firstName} ${enrolledStudent.lastName}`
+          )
+        );
+        console.log("Email sent successfully");
+      } catch (emailError) {
+        console.log("Email sending failed (non-blocking):", emailError.message);
+      }
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({ success: false, error: error.message });
+      console.log("Enrollment error for course:", courseId, error);
+      continue;
     }
   }
 };
