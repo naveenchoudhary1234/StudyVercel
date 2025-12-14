@@ -3,6 +3,6 @@ const router = express.Router();
 const { generateAnswer } = require("../controllers/Voice");
 const { auth } = require("../middlewares/auth");
 
-router.post("/generate-answer", auth, generateAnswer);
+router.post("/generate-answer",generateAnswer);
 
 module.exports = router;

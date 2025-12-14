@@ -11,16 +11,20 @@ const generateAnswer = async (req, res) => {
       });
     }
 
+    console.log(process.env.GROQ_API_KEY);
+
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama3-8b-8192", 
+        model: "llama-3.3-70b-versatile", 
         messages: [
           {
             role: "user",
             content: question,
           },
         ],
+        temperature: 0.7,
+        max_tokens: 1024,
       },
       {
         headers: {
@@ -41,9 +45,23 @@ const generateAnswer = async (req, res) => {
   } catch (error) {
     console.error("Groq API Error:", error.response?.data || error.message);
 
+    if (error.response?.status === 401) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid API key. Please check GROQ_API_KEY in environment variables.",
+      });
+    }
+
+    if (error.response?.status === 429) {
+      return res.status(429).json({
+        success: false,
+        message: "Rate limit exceeded. Please try again later.",
+      });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "Something went wrong while generating answer",
+      message: error.response?.data?.error?.message || error.message || "Something went wrong while generating answer",
     });
   }
 };
