@@ -272,7 +272,7 @@ const User = require("../Model/User");
 const mailSender = require("../Util/MailSender");
 const mongoose = require("mongoose");
 require("dotenv").config();
-console.log(process.env.RAJORPAY_SECRET);
+
 
 
 const {
@@ -339,11 +339,10 @@ exports.verifyPayment = async (req, res) => {
   const razorpay_signature = req.body?.razorpay_signature;
   const courses = req.body?.courses;
   const userId = req.user.id;
-  console.log(razorpay_order_id);
-  console.log(razorpay_payment_id);
-  console.log(razorpay_signature);
-  console.log(courses);
-  console.log
+  console.log("ORDER ID:", razorpay_order_id);
+console.log("PAYMENT ID:", razorpay_payment_id);
+console.log("SIGNATURE FROM FRONTEND:", razorpay_signature);
+console.log("SECRET:", process.env.RAJORPAY_SECRET);
   if (
     !razorpay_order_id ||
     !razorpay_payment_id ||
